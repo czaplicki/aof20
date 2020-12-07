@@ -28,7 +28,7 @@ process i = map test i
 test :: (Int,Int,Char,String) -> (Int,Int,Char,String,Bool)
 test (min', max', char, pass) =
     let count = length $ filter (char ==) pass :: Int
-        valid = (count > min')
+        valid = (count >= min') && (count <= max')
     in  (min', max', char, pass ++ show count, valid)
 
 
