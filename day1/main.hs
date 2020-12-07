@@ -9,7 +9,17 @@ parse :: String -> [Int]
 parse input = map read $ lines input
 
 process :: [Int] -> [Int]
-process x = head [ [a, b] | a <- x, b <- x, a + b == 2020, a /= b ]
+--part 1
+--process x = head [ [a, b] | a <- x, b <- x, a + b == 2020, a /= b ]
+
+--part 2
+process x = head [
+                 [a, b, c] |
+                 a <- x, b <- x, c <- x,
+                 a + b + c == 2020,
+                 a /= b, a /= c, b /=c
+                 ]
+
 
 display :: [Int] -> String
 display i = unwords $ (intersperse " * " $ map show i) ++
