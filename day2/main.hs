@@ -25,14 +25,21 @@ takeInt i = ( read $ takeWhile isDigit i, dropWhile isDigit i)
 process :: [(Int,Int,Char,String)] -> [(Int,Int,Char,String,Bool)]
 process i = map test i
 
+    -- Part 1
+-- test :: (Int,Int,Char,String) -> (Int,Int,Char,String,Bool)
+-- test (min', max', char, pass) =
+--     let count = length $ filter (char ==) pass :: Int
+--         valid = (count >= min') && (count <= max')
+--     in  (min', max', char, pass ++ show count, valid)
+
+-- Part 2
 test :: (Int,Int,Char,String) -> (Int,Int,Char,String,Bool)
-test (min', max', char, pass) =
-    let count = length $ filter (char ==) pass :: Int
-        valid = (count >= min') && (count <= max')
-    in  (min', max', char, pass ++ show count, valid)
-
-
+test (first, second, char, pass) =
+    let first'  = char == pass !! (first     )
+        second' = char == pass !! (second    )
+        valid   = first' /= second' -- XOR
+     in (first, second, char, pass, valid)
 
 display :: [(Int,Int,Char,String,Bool)] -> String
--- display = unlines . (map show)
-display = show . length . filter (\(_,_,_,_,v) -> v)
+-- display = unlines . (map show) -- display entrys
+display = show . length . filter (\(_,_,_,_,v) -> v) -- sum entrys
